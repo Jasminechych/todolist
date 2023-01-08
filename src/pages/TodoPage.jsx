@@ -27,6 +27,7 @@ const dummyTodos = [
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState(dummyTodos);
+  let count = todos.length
 
   const handleOnChange = (value) => setInputValue(value);
 
@@ -97,6 +98,12 @@ const TodoPage = () => {
     });
   };
 
+  const handleDelete = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== id);
+    });
+  };
+
   return (
     <div>
       TodoPage
@@ -112,8 +119,9 @@ const TodoPage = () => {
         onToggleDone={handleToggleDone}
         onChangeMode={handleChangeMode}
         onSave={handleSave}
+        onDelete={handleDelete}
       />
-      <Footer />
+      <Footer count={count} />
     </div>
   );
 };
