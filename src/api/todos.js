@@ -3,10 +3,11 @@ const baseUrl = 'https://todo-list.alphacamp.io/api';
 
 const axiosInstance = axios.create({ baseURL: baseUrl });
 
+
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken')
-    if (config) {
+    if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
